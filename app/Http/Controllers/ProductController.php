@@ -55,5 +55,28 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('status', 'Producto creado con éxito');
     }
 
+    public function toggleFavorite($id)
+    {
+        $product = Product::findOrFail($id);
+        $user = auth()->user();
+    
+        if ($user->favorites->contains($product->id)) {
+            // Eliminar de favoritos
+            $user->favorites()->detach($product->id);
+            return redirect()->back()->with('status', 'Producto eliminado de favoritos.');
+        } else {
+            // Agregar a favoritos
+            $user->favorites()->attach($product->id);
+            return redirect()->back()->with('status', 'Producto añadido a favoritos.');
+        }
+    }
+    
+    public function favorites()
+    {
+        // Asegúrate de que la relación `favorites` está definida en el modelo User
+        $favorites = auth()->user()->favorites; // Recupera los favoritos del usuario
+        return view('products.favorites', compact('favorites'));
+    }
+    
 
 }

@@ -11,9 +11,7 @@ class AddUserIdToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            //$table->unsignedBigInteger('user_id');  // Agregar columna user_id
-
-            // Definir la clave foránea
+            $table->unsignedBigInteger('user_id'); // Asegúrate de que la columna exista
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

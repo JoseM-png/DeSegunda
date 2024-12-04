@@ -7,10 +7,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-teal-50 min-h-screen">
-
 @extends('layouts.app')
 
+@section('content')
 <div class="max-w-7xl mx-auto px-6 py-12">
+
+    <!-- Botón para volver al inicio -->
+    <div class="mb-6 text-center">
+        <a href="{{ route('products.index') }}" class="inline-block py-3 px-6 bg-teal-500 text-white font-semibold rounded-md hover:bg-teal-600 shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+            Volver al Inicio
+        </a>
+    </div>
+
     <!-- Encabezado de perfil -->
     <div class="bg-white shadow-lg rounded-lg p-8 mb-12">
         <h2 class="text-4xl font-bold text-teal-600 mb-6 text-center">Mi Perfil</h2>
@@ -24,8 +32,7 @@
 
             <!-- Botón para editar perfil -->
             <div class="flex justify-center md:justify-end">
-                <a href="{{ route('profile.edit') }}" 
-                   class="py-3 px-6 bg-teal-500 text-white font-semibold text-sm rounded-md hover:bg-teal-600 shadow-lg">
+                <a href="{{ route('profile.edit') }}" class="py-3 px-6 bg-teal-500 text-white font-semibold text-sm rounded-md hover:bg-teal-600 shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
                     Editar Perfil
                 </a>
             </div>
@@ -39,12 +46,11 @@
         @if($products->count() > 0)
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($products as $product)
-                    <div class="bg-teal-100 p-6 rounded-lg shadow-md">
+                    <div class="bg-teal-100 p-6 rounded-lg shadow-md transform hover:scale-105 transition duration-300 ease-in-out">
                         <h4 class="text-xl font-semibold text-gray-800">{{ $product->name }}</h4>
                         <p class="text-gray-600 mt-2">{{ Str::limit($product->description, 60, '...') }}</p>
                         <p class="text-lg font-medium text-gray-800 mt-4">${{ number_format($product->price, 2) }}</p>
-                        <a href="{{ route('product.show', $product->id) }}" 
-                           class="mt-4 inline-block py-2 px-4 bg-teal-500 text-white rounded-md hover:bg-teal-600 shadow">
+                        <a href="{{ route('product.show', $product->id) }}" class="mt-4 inline-block py-2 px-4 bg-teal-500 text-white rounded-md hover:bg-teal-600 shadow transform hover:scale-105 transition duration-300 ease-in-out">
                             Ver Producto
                         </a>
                     </div>
@@ -56,13 +62,14 @@
 
         <!-- Botón para agregar un producto -->
         <div class="mt-8 text-center">
-            <a href="{{ route('product.create') }}" 
-               class="inline-block py-3 px-6 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 shadow-lg">
+            <a href="{{ route('product.create') }}" class="inline-block py-3 px-6 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
                 Agregar Producto
             </a>
         </div>
     </div>
 </div>
+@endsection
+
 
 </body>
 </html>

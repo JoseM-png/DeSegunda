@@ -40,16 +40,20 @@
         <p class="text-gray-600 mt-2">${{ number_format($product->price, 2) }}</p>
         <p class="text-gray-600 mt-4">{{ $product->description }}</p>
         <div class="mt-6 flex space-x-4">
-            <form action="{{ route('favorites.store', $product->id) }}" method="POST">
-                @csrf
-                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
-                    Guardar en Favoritos
-                </button>
-            </form>
-            <a href="{{ route('checkout', $product->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600">
-                Comprar
-            </a>
-        </div>
+    <!-- Formulario para alternar favoritos -->
+    <form action="{{ route('products.favorite', $product->id) }}" method="POST">
+        @csrf
+        <button type="submit" class="{{ Auth::user()->favorites->contains($product->id) ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600' }} text-white px-4 py-2 rounded-md">
+            {{ Auth::user()->favorites->contains($product->id) ? 'Eliminar de Favoritos' : 'Guardar en Favoritos' }}
+        </button>
+    </form>
+
+    <!-- Botón para comprar -->
+    <a href="{{ route('checkout', $product->id) }}" class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600">
+        Comprar
+    </a>
+</div>
+
     </div>
 </div>
 

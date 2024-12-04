@@ -46,4 +46,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Product::class);
     }
+
+    // En el modelo User (app/Models/User.php)
+public function favorites()
+{
+    return $this->belongsToMany(Product::class, 'favorite_product');
+}
+
+    
+
 }

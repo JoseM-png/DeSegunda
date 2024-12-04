@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\FavoriteController;
 use App\Models\Product;
 /*
 |--------------------------------------------------------------------------
@@ -67,3 +68,8 @@ Route::post('/notifications/read', function () {
     return response()->json(['status' => 'success']);
 })->name('notifications.read');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+
+
+Route::post('/products/{id}/favorite', [ProductController::class, 'toggleFavorite'])->name('products.favorite');
+Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+Route::delete('/favorites/{product}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
