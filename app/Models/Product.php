@@ -23,6 +23,13 @@ class Product extends Model
     return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
 }
 
+
+public function favorites()
+{
+    $favorites = auth()->user()->favorites; // Recupera los productos favoritos del usuario
+    return view('products.favorites', compact('favorites'));
+}
+
 }
 
 
