@@ -1,6 +1,14 @@
+[phases.setup]
+# Forzar una versión específica de PHP (por ejemplo, PHP 8.1)
+runtime = "php@8.2"
+
 [phases.build]
-# Customize the PHP configuration
-cmds = ['...',
-    "echo \"<<<<<<<<<<<<< CHANGING THE PHP INI >>>>>>>>>>>>>>\"" ,
-    "PHP_INI_PATH=$(php -i | grep '/php.ini' | awk '{print $6}') && echo -e '\nupload_max_filesize = 10M\npost_max_size = 10M' >> $PHP_INI_PATH",
+# Comandos para personalizar la configuración de PHP
+cmds = [
+    "echo \"<<<<<<<<<<<<< CUSTOMIZING PHP INI >>>>>>>>>>>>>>\"",
+    "PHP_INI_PATH=$(php -i | grep '/php.ini' | awk '{print $6}') && echo -e '\nupload_max_filesize = 10M\npost_max_size = 10M' >> $PHP_INI_PATH"
 ]
+
+[phases.start]
+# Comando para iniciar Laravel
+cmd = "php artisan serve --host=0.0.0.0 --port=8080"
